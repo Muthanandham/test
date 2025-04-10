@@ -19,7 +19,7 @@ pipeline {
      stage('Run Unit Tests') {
       steps {
         echo '🧪 Running Angular unit tests...'
-        sh 'ng test --watch=false --browsers=ChromeHeadless'
+        sh 'ng test '
       }
     }
 
