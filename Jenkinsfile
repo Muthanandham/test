@@ -15,8 +15,8 @@ pipeline {
 
     stage('Install Dependencies') {
       steps {
-        echo '📦 Running npm install...'
-        sh 'npm install --legacy-peer-deps'
+        echo '📦 Installing npm dependencies...'
+        sh 'npm install'
       }
     }
 
@@ -27,22 +27,23 @@ pipeline {
       }
     }
 
-    
-
-    stage('Deploy (Simulated)') {
+    stage('Deploy') {
       steps {
-        echo '🚀 Simulating deploy...'
-        sh 'ls -la dist/'
+        echo '🚀 Deploying app to /var/www/my-app...'
+        sh '''
+          sudo rm -rf /var/www/my-app
+          sudo cp -r /home/laptop-h04/Desktop/code/my-angular/dist /var/www/my-app
+        '''
       }
     }
   }
 
   post {
     success {
-      echo '✅ Build succeeded!'
+      echo '✅ Build and deployment successful!'
     }
     failure {
-      echo '❌ Build failed!'
+      echo '❌ Something went wrong in the pipeline!'
     }
   }
 }
