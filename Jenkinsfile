@@ -29,11 +29,11 @@ stage('Archive Build Artifacts') {
 sh 'zip -r my-angular.zip dist/*'
 archiveArtifacts artifacts: 'my-angular.zip', fingerprint: true  }
 }
-stage('Fetch Build Artifacts') {
-  steps {
-    copyArtifacts(projectName: 'my-angular', selector: lastSuccessful())
-  }
-}
+// stage('Fetch Build Artifacts') {
+//   steps {
+//     copyArtifacts(projectName: 'my-angular', selector: lastSuccessful())
+//   }
+// }
 
     stage('Build App') {
       steps {
