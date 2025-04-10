@@ -1,0 +1,48 @@
+pipeline {
+  agent any
+
+  environment {
+    NG_CLI_ANALYTICS = "false"
+  }
+
+  stages {
+    stage('Checkout Code') {
+      steps {
+        echo '🔄 Cloning repo...'
+        checkout scm
+      }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        echo '📦 Running npm install...'
+        sh 'npm install'
+      }
+    }
+
+    stage('Build App') {
+      steps {
+        echo '⚙️ Building Angular app...'
+        sh 'npm run build'
+      }
+    }
+
+    
+
+    stage('Deploy (Simulated)') {
+      steps {
+        echo '🚀 Simulating deploy...'
+        sh 'ls -la dist/'
+      }
+    }
+  }
+
+  post {
+    success {
+      echo '✅ Build succeeded!'
+    }
+    failure {
+      echo '❌ Build failed!'
+    }
+  }
+}
