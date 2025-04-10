@@ -1,10 +1,6 @@
 pipeline {
   agent any
 
-  environment {
-    NG_CLI_ANALYTICS = "false"
-  }
-
   stages {
     stage('Checkout Code') {
       steps {
@@ -17,6 +13,13 @@ pipeline {
       steps {
         echo '📦 Installing npm dependencies...'
         sh 'npm install --legacy-peer-deps'
+      }
+    }
+
+     stage('Run Unit Tests') {
+      steps {
+        echo '🧪 Running Angular unit tests...'
+        sh 'ng test --watch=false --browsers=ChromeHeadless'
       }
     }
 
