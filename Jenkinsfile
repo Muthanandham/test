@@ -32,7 +32,7 @@ pipeline {
         echo '🚀 Deploying app to /var/www/my-app...'
         sh '''
           sudo rm -rf /var/www/my-app/*
-          sudo cp -r dist/* /var/www/my-app
+          sudo cp -r dist/my-angular* /var/www/my-app
           sudo nginx -t
           sudo systemctl restart nginx
 
