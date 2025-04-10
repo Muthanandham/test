@@ -32,8 +32,10 @@ pipeline {
         echo '🚀 Deploying app to /var/www/my-app...'
         sh '''
           sudo rm -rf /var/www/my-app
-          sudo mkdir /home/laptop-h04/Desktop/New
           sudo cp -r /home/laptop-h04/Desktop/code/my-angular/dist /var/www/my-app
+        sudo nginx -t
+sudo systemctl restart nginx
+
         '''
       }
     }
