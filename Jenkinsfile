@@ -31,7 +31,8 @@ pipeline {
       steps {
         echo '🚀 Deploying app to /var/www/my-app...'
         sh '''
-          sudo rm -r  /home/laptop-h04/Desktop/code/my-angular/dist /var/www/my-app
+          sudo rm -rf /var/www/my-app/*
+          sudo cp -r dist/* /var/www/my-app
           sudo nginx -t
           sudo systemctl restart nginx
 
