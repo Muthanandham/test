@@ -8,6 +8,7 @@ export class UserService {
 
   addUser(user: { username: string; password: string }) {
     this.users.push(user);
+    localStorage.setItem('users', JSON.stringify(this.users));
   }
 
   validateUser(username: string, password: string): boolean {
