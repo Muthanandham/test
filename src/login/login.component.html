@@ -33,6 +33,11 @@
       </div>
     </div>
 
+    <!-- 🔻 Place error message here -->
+    <div *ngIf="errorMessage" class="text-red-500 text-sm mb-4 text-center">
+      {{ errorMessage }}
+    </div>
+
     <div class="flex justify-center">
       <button
         type="button"
