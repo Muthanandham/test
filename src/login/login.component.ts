@@ -22,8 +22,23 @@ export class LoginComponent {
     this.router.navigate(['sign-up']);
   }
   onSubmit() {
-    const isValid = this.userService.validateUser(this.username, this.password);
+    const username = this.username?.trim();
+    const password = this.password?.trim();
+
+    if (!username || !password) {
+      this.errorMessage = 'Username and password are required';
+      return;
+    }
+
+    const storedUsers = localStorage.getItem('users');
+    const users = storedUsers ? JSON.parse(storedUsers) : [];
+
+    const isValid = users.some(
+      (user: any) => user.username === username && user.password === password
+    );
+
     if (isValid) {
+      this.errorMessage = '';
       this.router.navigate(['/main']);
     } else {
       this.errorMessage = 'Wrong credentials';
