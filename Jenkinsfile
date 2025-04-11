@@ -23,12 +23,7 @@ pipeline {
       }
     }
 
-stage('Archive Build Artifacts') {
-  steps {
-    echo '📦 Archiving build output...'
-sh 'zip -r my-angular.zip dist/*'
-archiveArtifacts artifacts: 'my-angular.zip', fingerprint: true  }
-}
+
 // stage('Fetch Build Artifacts') {
 //   steps {
 //     copyArtifacts(projectName: 'my-angular', selector: lastSuccessful())
@@ -41,6 +36,12 @@ archiveArtifacts artifacts: 'my-angular.zip', fingerprint: true  }
         sh 'npm run build'
       }
     }
+    stage('Archive Build Artifacts') {
+  steps {
+    echo '📦 Archiving build output...'
+sh 'zip -r my-angular.zip dist/*'
+archiveArtifacts artifacts: 'my-angular.zip', fingerprint: true  }
+}
     stage('Archive Build') {
       steps {
         archiveArtifacts artifacts: 'dist/**/*'
