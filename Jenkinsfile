@@ -41,18 +41,23 @@ archiveArtifacts artifacts: 'my-angular.zip', fingerprint: true  }
         sh 'npm run build'
       }
     }
-
-    stage('Deploy') {
+    stage('Archive Build') {
       steps {
-        echo '🚀 Deploying app to /var/www/my-app...'
-        sh '''
-          sudo rm -rf /var/www/my-app/*
-          sudo cp -r dist/my-angular/browser* /var/www/my-app
-
-
-        '''
+        archiveArtifacts artifacts: 'dist/**/*'
       }
     }
+
+    // stage('Deploy') {
+    //   steps {
+    //     echo '🚀 Deploying app to /var/www/my-app...'
+    //     sh '''
+    //       sudo rm -rf /var/www/my-app/*
+    //       sudo cp -r dist/my-angular/browser* /var/www/my-app
+
+
+    //     '''
+    //   }
+    // }
   }
 
   post {
